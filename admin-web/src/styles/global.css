@@ -1,0 +1,240 @@
+/* File Name: global.css
+   Created Time: 2026-09-22 19:39:10
+   Update Time: 2026-09-23 17:45:00 */
+
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Helvetica Neue", "Microsoft YaHei", sans-serif;
+  background: #f5f6f8;
+  color: #1f2329;
+}
+
+.moneyfont {
+  font-variant-numeric: tabular-nums;
+}
+
+.brand {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 16px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  flex: 0 0 auto;
+}
+
+.brand-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ===== 后台骨架（与 demo 的 .layout / .sidebar / .main 对齐）=====
+   关键点：整页固定一屏高并禁止 body 滚动，滚动只发生在 .admin-content 内部。
+   否则根 <Layout> 只有 min-height，高度会随内容增长，
+   顶栏与侧栏就会跟着整页一起滚（.side-menu 的 overflow-y 也永远不触发）。 */
+.admin-shell {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* 侧栏：固定一屏高的 flex 列 —— .brand 与 .side-foot 固定在上下两端，
+   只有中间的 .side-menu 滚动 */
+.admin-sider.ant-layout-sider {
+  height: 100vh;
+  flex: 0 0 auto;
+}
+
+.admin-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 右侧主区：固定一屏高的 flex 列，顶栏固定、内容区滚动 */
+.admin-main.ant-layout {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-content.ant-layout-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px;
+  background: #f5f6f8;
+}
+
+/* ===== 侧栏菜单 ===== */
+/* 菜单区可滚动并把 .side-foot 顶到底部；min-height:0 是它在 flex 列里
+   能真正产生滚动的必要条件（否则子项会把父高撑开） */
+.side-menu {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+/* 自定义 SVG 图标经 antd 渲染后挂在 .ant-menu-item-icon 上（不是 .anticon），
+   尺寸统一 18px，同时覆盖 antd 自带的右间距 */
+.side-menu.ant-menu-dark .ant-menu-item > svg.ant-menu-item-icon,
+.side-menu .ant-menu-item .ant-menu-item-icon,
+.side-menu .ant-menu-item .anticon,
+.side-menu .ant-menu-item .anticon svg {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+/* .menu-item{padding:10px 18px; gap:10px; height:39px}
+   antd 会把 padding-left 以行内样式写入（缩进计算），必须用 !important 才能覆盖 */
+.side-menu.ant-menu-dark.ant-menu-inline .ant-menu-item,
+.side-menu.ant-menu-dark .ant-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 39px;
+  line-height: 39px;
+  padding: 0 18px !important;
+  margin: 0;
+  width: 100%;
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 覆盖 antd 给 .anticon 的 margin-right（默认 10px）与标题的左间距，
+   避免和 flex gap 叠加导致图标与文字被拉开 */
+.side-menu.ant-menu-dark.ant-menu-inline .ant-menu-item > .anticon,
+.side-menu.ant-menu-dark .ant-menu-item .anticon {
+  margin-inline-end: 0;
+  margin-right: 0;
+  color: inherit;
+}
+
+.side-menu.ant-menu-dark.ant-menu-inline .ant-menu-item > .ant-menu-title-content,
+.side-menu.ant-menu-dark .ant-menu-item .ant-menu-title-content {
+  margin-inline-start: 0;
+  margin-left: 0;
+}
+
+/* .menu-item.on{color:#fff;background:var(--pri)} —— 选中项文字必须纯白。
+   注意：上面的基础规则是 4 类选择器 (0,4,0)，而旧写法只有 3 类 (0,3,0)，
+   虽然写在后面但优先级更低，永远输给灰色，所以这里必须补齐到同为 4 类。
+   文字色声明在 <li> 上，会继承给 .ant-menu-title-content 与 svg 图标，一并变白。 */
+.side-menu.ant-menu-dark.ant-menu-inline .ant-menu-item:hover,
+.side-menu.ant-menu-dark.ant-menu-inline .ant-menu-item-selected,
+.side-menu.ant-menu-dark .ant-menu-item:hover,
+.side-menu.ant-menu-dark .ant-menu-item-selected {
+  color: #fff;
+}
+
+/* 兜底：antd 在亮/暗两套主题下可能把文字色直接写进标题与图标节点，显式再声明一次 */
+.side-menu.ant-menu-dark .ant-menu-item-selected .ant-menu-title-content,
+.side-menu.ant-menu-dark .ant-menu-item-selected .ant-menu-item-icon,
+.side-menu.ant-menu-dark .ant-menu-item-selected .anticon {
+  color: #fff;
+}
+
+.side-foot {
+  padding: 12px 16px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex: 0 0 auto;
+}
+
+/* ===== 顶栏（.side-admin-topbar） ===== */
+/* 固定在 .admin-main 顶部，不参与滚动。放在文件末尾附近并使用单类选择器，
+   避免复杂选择器被开发态注入顺序影响 */
+.side-admin-topbar {
+  height: 56px !important;
+  line-height: 56px !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #e5e6eb;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px !important;
+  flex: 0 0 auto;
+}
+
+.side-admin-topbar .crumb {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2329;
+}
+
+.side-admin-topbar .top-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.side-admin-topbar .sub {
+  color: #595959;
+}
+
+.side-admin-topbar .link {
+  color: #1677ff;
+  cursor: pointer;
+}
+
+.side-admin-topbar .link:hover {
+  text-decoration: underline;
+}
+
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.page-title {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.stat-label {
+  color: #8c8c8c;
+  font-size: 13px;
+}
+
+.stat-value {
+  font-size: 26px;
+  font-weight: 600;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat-sub {
+  font-size: 12px;
+  color: #8c8c8c;
+  margin-top: 4px;
+}

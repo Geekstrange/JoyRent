@@ -1,0 +1,207 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:16:59
+ * Update Time: 2026-09-22 20:16:59
+ */
+
+
+.invoice-apply-page {
+  padding: 24px 24px 40px;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.equip-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.equip-thumb {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  background: #e6f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #1677ff;
+  font-weight: 600;
+  flex-shrink: 0;
+  /* 有真实封面时图片要贴满圆角容器，不能溢出 */
+  overflow: hidden;
+}
+
+.equip-thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.equip-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.equip-name {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.equip-sub {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.sec {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.type-row {
+  display: flex;
+  gap: 16px;
+}
+
+.type-chip {
+  flex: 1;
+  padding: 20px 24px;
+  border-radius: 20px;
+  border: 2px solid var(--line);
+  background: #fff;
+
+  &.on {
+    border-color: var(--pri);
+    background: var(--pri-light);
+
+    .type-label {
+      color: var(--pri);
+    }
+  }
+}
+
+.type-label {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.type-hint {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 26px;
+  color: var(--sub);
+  margin-bottom: 12px;
+}
+
+.input {
+  width: 100%;
+  height: 88px;
+  background: var(--bg);
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 0 24px;
+  font-size: 28px;
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  margin-top: 20px;
+}
+
+.amount-label {
+  font-size: 26px;
+  color: var(--muted);
+}
+
+.amount-val {
+  font-size: 36px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.amount-tip {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 12px;
+  line-height: 1.6;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 44px;
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  margin: 0;
+
+  &::after {
+    border: none;
+  }
+}
+
+.info {
+  display: block;
+  font-size: 26px;
+  color: var(--sub);
+  margin: 12px 0 20px;
+}
+
+.primary-btn {
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 44px;
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  margin: 0;
+
+  &::after {
+    border: none;
+  }
+}
+
+.note {
+  display: block;
+  margin-top: 24px;
+  padding: 0 8px;
+  font-size: 22px;
+  color: var(--muted);
+  line-height: 1.7;
+}

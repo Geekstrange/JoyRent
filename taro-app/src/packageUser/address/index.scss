@@ -1,0 +1,165 @@
+/* 收货地址簿列表页 */
+
+.addr-page {
+  /* 底部为固定操作栏留出安全距离，避免最后一张卡片被盖住 */
+  padding: 24px 24px 180px;
+  min-height: 100vh;
+}
+
+/* 选择模式下的提示条：明确告诉用户「点一条就会用这个地址下单」 */
+.pick-tip {
+  background: #e6f4ff;
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.pick-tip-text {
+  font-size: 24px;
+  color: var(--pri);
+  line-height: 1.5;
+}
+
+.addr-list {
+  display: block;
+}
+
+.addr-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 24px 20px;
+  margin-bottom: 20px;
+}
+
+.addr-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.addr-name {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.addr-phone {
+  font-size: 26px;
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 「默认」角标 */
+.addr-tag {
+  font-size: 20px;
+  color: var(--pri);
+  background: #e6f4ff;
+  border-radius: 8px;
+  padding: 2px 10px;
+  line-height: 1.6;
+}
+
+.addr-text {
+  display: block;
+  font-size: 26px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+/* 卡片底部操作行：左侧「设为默认」，右侧「编辑 / 删除」 */
+.addr-ops {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.op {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.op-disabled {
+  opacity: 0.9;
+}
+
+/* 单选圈：仿原生 radio，选中后填充主色 + 白色圆点 */
+.radio {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  box-sizing: border-box;
+  position: relative;
+
+  &.on {
+    border-color: var(--pri);
+    background: var(--pri);
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px 0 0 -6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+  }
+}
+
+.op-text {
+  font-size: 24px;
+  color: var(--sub);
+}
+
+.op-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.op-link {
+  font-size: 24px;
+  color: var(--pri);
+
+  &.danger {
+    color: var(--red);
+  }
+}
+
+.footer-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding: 16px 24px calc(16px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  z-index: 30;
+}
+
+.primary-btn {
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 44px;
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  margin: 0;
+
+  &::after {
+    border: none;
+  }
+}

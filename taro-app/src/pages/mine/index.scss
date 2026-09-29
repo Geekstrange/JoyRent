@@ -1,0 +1,199 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:08:05
+ * Update Time: 2026-09-22 20:08:05
+ */
+
+
+/* 我的页
+ * 尺寸换算：设计稿 750，1 css px(390 视口) = 2 设计单位。
+ * 下列数值均按此由原始 390 视口尺寸 ×2 得到。
+ */
+
+.mine-page {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* 渐变头部：linear-gradient(135deg,#1677ff,#69b1ff)
+   圆角 14px → 28px，内边距 14px → 28px */
+.profile-card {
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  border-radius: 28px;
+  padding: 28px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.profile-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* 头像 54px → 108px，内部留白 12px → 24px */
+.avatar {
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 头像内的 svg 图标（白色版） */
+.avatar-svg {
+  width: 60px;
+  height: 60px;
+  display: block;
+}
+
+/* 统计行：卡片内三等分「待支付 / 租赁中 / 全部订单」，上边距 16px → 32px */
+.profile-stats {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.stat-cell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .stat-num {
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 22px;
+    opacity: 0.9;
+    margin-top: 6px;
+  }
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-name {
+  display: block;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.profile-sub {
+  display: block;
+  font-size: 24px;
+  opacity: 0.9;
+  margin-top: 6px;
+}
+
+.login-btn {
+  margin-top: 32px;
+  width: 100%;
+  height: 88px;
+  line-height: 88px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #1677ff;
+  border-radius: 44px;
+  font-size: 28px;
+  font-weight: 600;
+  border: none;
+
+  &::after {
+    border: none;
+  }
+}
+
+/* 菜单卡片：圆角 14px → 28px，左右内边距 14px → 28px */
+.menu-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 0 28px;
+  margin-bottom: 20px;
+}
+
+/* 菜单行：上下内边距 11px → 22px，分隔线为 1px 实线 */
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+/* 菜单图标 22px → 44px */
+.menu-ico {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.menu-label {
+  font-size: 28px;
+  color: var(--text);
+}
+
+.menu-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+
+.menu-extra {
+  font-size: 24px;
+  color: var(--pri);
+}
+
+.menu-arrow {
+  font-size: 32px;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.note-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px;
+}
+
+.note-title {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.note-text {
+  display: block;
+  font-size: 24px;
+  color: var(--muted);
+  line-height: 1.7;
+}

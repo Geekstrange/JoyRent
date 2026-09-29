@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS shipment_trace;
+DROP TABLE IF EXISTS shipment;
+DROP TABLE IF EXISTS invoice;
+DROP TABLE IF EXISTS payment;
+DROP TABLE IF EXISTS equipment_unit_occupation;
+DROP TABLE IF EXISTS "order";
+DROP TABLE IF EXISTS equipment_unit;
+DROP TABLE IF EXISTS equipment;
+DROP TABLE IF EXISTS category;
+DROP TABLE IF EXISTS app_user;
+DROP TABLE IF EXISTS admin_user;
+DROP TABLE IF EXISTS merchant;
+
+DROP FUNCTION IF EXISTS touch_updated_at();

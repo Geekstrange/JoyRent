@@ -1,0 +1,13 @@
+{
+  "format": 2,
+  "compileType": "mini",
+  "miniprogramRoot": "./",
+  "compileOptions": {
+    "component2": true
+  },
+  "developOptions": {
+    "parallel": true,
+    "minify": false
+  },
+  "scripts": {}
+}

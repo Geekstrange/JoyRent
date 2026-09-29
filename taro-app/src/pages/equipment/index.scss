@@ -1,0 +1,263 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:07:22
+ * Update Time: 2026-09-22 20:07:22
+ */
+
+
+.equipment-page {
+  padding-bottom: 160px;
+  min-height: 100vh;
+}
+
+.banner {
+  width: 100%;
+  height: 500px;
+  background: #f0f2f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.banner-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e6f4ff;
+  color: #1677ff;
+  font-size: 200px;
+  font-weight: 700;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 24px;
+  margin: 20px 24px;
+}
+
+.d-title {
+  display: block;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.d-cat {
+  display: block;
+  font-size: 24px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.d-price-row {
+  display: flex;
+  align-items: baseline;
+  margin-top: 20px;
+}
+
+.d-price {
+  font-size: 52px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.d-unit {
+  font-size: 24px;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.d-deposit {
+  font-size: 24px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.d-desc {
+  display: block;
+  margin-top: 20px;
+  font-size: 26px;
+  color: var(--sub);
+  line-height: 1.6;
+}
+
+.sec {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.sub-label {
+  display: block;
+  font-size: 24px;
+  color: var(--sub);
+  margin: 8px 0 12px;
+}
+
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 160px;
+  padding-top: 12px;
+}
+
+.bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.bar {
+  width: 100%;
+  background: linear-gradient(180deg, #69b1ff, #1677ff);
+  border-radius: 6px 6px 0 0;
+  min-height: 6px;
+
+  &.out {
+    background: #ffccc7;
+  }
+}
+
+.bar-lbl {
+  font-size: 18px;
+  color: #bfbfbf;
+  margin-top: 6px;
+}
+
+.date-bar {
+  white-space: nowrap;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+.date-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 96px;
+  padding: 14px 12px;
+  background: var(--bg);
+  border-radius: 16px;
+  font-size: 24px;
+  color: var(--sub);
+  margin-right: 12px;
+
+  &.on {
+    background: var(--pri);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  &.dis {
+    opacity: 0.32;
+  }
+}
+
+.fee-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 28px;
+  padding: 12px 0;
+
+  &.big {
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+
+.fee-label {
+  color: var(--muted);
+}
+
+.fee-val {
+  color: var(--text);
+}
+
+.fee-total {
+  color: var(--red);
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.avail-hint {
+  display: block;
+  margin-top: 16px;
+  font-size: 24px;
+
+  &.ok {
+    color: var(--green);
+  }
+  &.warn {
+    color: var(--red);
+  }
+}
+
+.footer-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding: 16px 24px calc(16px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  z-index: 30;
+}
+
+.footer-sum {
+  flex: 1;
+}
+
+.footer-price {
+  display: block;
+  font-size: 40px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.footer-hint {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.btn-rent {
+  width: 260px;
+  height: 88px;
+  line-height: 88px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 44px;
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  margin: 0;
+
+  &::after {
+    border: none;
+  }
+
+  &.disabled {
+    background: #d9d9d9;
+    color: #fff;
+  }
+}

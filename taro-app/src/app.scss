@@ -1,0 +1,29 @@
+page {
+  --pri: #1677ff;
+  --pri-light: #e6f0ff;
+  --bg: #f5f6f8;
+  --text: #1f2329;
+  --sub: #595959;
+  --muted: #8c8c8c;
+  --line: #f0f0f0;
+  --red: #cf1322;
+  --green: #52c41a;
+  --orange: #fa8c16;
+
+  background: var(--bg);
+  color: var(--text);
+  font-size: 28px;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Helvetica Neue", "Microsoft YaHei", sans-serif;
+}
+
+view,
+text,
+image,
+button {
+  box-sizing: border-box;
+}
+
+.moneyfont {
+  font-variant-numeric: tabular-nums;
+}

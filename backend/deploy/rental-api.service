@@ -1,0 +1,33 @@
+[Unit]
+Description=Rental Platform API
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=rental
+Group=rental
+WorkingDirectory=/opt/rental
+ExecStart=/opt/rental/bin/rental-api -config /opt/rental/configs/config.toml
+Restart=on-failure
+RestartSec=5
+
+# 静态资源目录必须可写，其余系统目录只读
+ReadWritePaths=/opt/rental/data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+# 日志
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=rental-api
+
+[Install]
+WantedBy=multi-user.target

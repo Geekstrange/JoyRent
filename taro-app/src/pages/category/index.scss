@@ -1,0 +1,45 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:06:36
+ * Update Time: 2026-09-22 20:06:36
+ */
+
+
+.category-page {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.cat-group {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px 28px;
+  margin-bottom: 20px;
+}
+
+.cat-group-title {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.cat-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* demo .subtag：bg=var(--bg)，radius 10→20，padding 7px 13px→14px 26px，
+   font 13→26，color=var(--sub) */
+.cat-sub {
+  display: flex;
+  align-items: center;
+  padding: 14px 26px;
+  background: var(--bg);
+  border-radius: 20px;
+
+  .cat-sub-text {
+    font-size: 26px;
+    color: var(--sub);
+  }
+}

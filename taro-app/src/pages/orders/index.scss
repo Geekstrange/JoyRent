@@ -1,0 +1,282 @@
+/* File Name: index.scss
+ * 订单列表页 —— 与 demo/user.html pageOrders 对齐。
+ * 尺寸换算：设计稿 750，1 css px(390 视口) = 2 设计单位（demo 值 ×2）。
+ */
+
+.orders-page {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* demo .otabs：radius 12→24，padding 4→8 */
+.otabs {
+  display: flex;
+  background: #fff;
+  border-radius: 24px;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+
+/* demo .otab：padding 7px 0→14px 0，radius 9→18，font 13→26 */
+.otab {
+  flex: 1;
+  text-align: center;
+  padding: 14px 0;
+  border-radius: 18px;
+  font-size: 26px;
+  color: var(--sub);
+
+  &.on {
+    background: var(--pri-light);
+    color: var(--pri);
+    font-weight: 600;
+  }
+}
+
+/* 发票汇总卡（demo .invsum） */
+.inv-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+
+.inv-card-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* demo .ico-md：20px→40px */
+.inv-ico {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+.inv-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.inv-more {
+  margin-left: auto;
+  font-size: 24px;
+  color: var(--muted);
+}
+
+.inv-card-sum {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 16px;
+}
+
+.inv-sum-item {
+  font-size: 24px;
+  color: var(--muted);
+}
+
+.inv-sum-strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.inv-sum-warn {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* demo .card：radius 14→28，padding 14→28 */
+.order-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 28px;
+}
+
+.order-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* demo .ono：11px→22px */
+.order-no {
+  font-size: 22px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.order-body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* demo 缩略图：46px→92px，radius 10→20，首字 16px→32px/600 */
+.order-thumb {
+  width: 92px;
+  height: 92px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.order-thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.order-thumb-text {
+  font-size: 32px;
+  color: #1677ff;
+  font-weight: 600;
+}
+
+.order-info {
+  flex: 1;
+  min-width: 0;
+}
+
+/* demo 14px→28px */
+.order-name {
+  display: block;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* demo 12px→24px */
+.order-period {
+  display: block;
+  font-size: 24px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+.order-tags {
+  margin-top: 10px;
+}
+
+.order-amount {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* demo 16px→32px */
+.order-price {
+  display: block;
+  font-size: 32px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+/* demo 11px→22px */
+.order-dep {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ── 物流行 / 发票行（demo .shipline / .invline）────────────────
+   margin-top 9→18，padding-top 9→18，上边 1px 虚线 */
+.order-line {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+}
+
+.order-line.dim {
+  opacity: 0.6;
+}
+
+/* demo .ico-sm：15px→30px */
+.line-ico {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  display: block;
+}
+
+/* demo 12px→24px */
+.line-label {
+  font-size: 24px;
+  color: var(--muted);
+
+  &.pri {
+    color: var(--pri);
+  }
+}
+
+/* demo .invtag/.shiptag：padding 1px 7px→2px 14px，radius 4→8，font 11→22 */
+.line-tag {
+  padding: 2px 14px;
+  border-radius: 8px;
+}
+
+.line-tag-text {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* 最新轨迹：单行截断（demo .ship-latest） */
+.line-latest {
+  flex: 1;
+  min-width: 0;
+  font-size: 24px;
+  color: var(--sub);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* demo 里 margin-left:auto 的尾部提示 */
+.line-act {
+  margin-left: auto;
+  font-size: 24px;
+  color: var(--muted);
+}
+
+.order-action {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.order-hint {
+  font-size: 24px;
+  color: var(--orange);
+}
+
+.order-btn {
+  padding: 12px 32px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 32px;
+  font-size: 26px;
+  font-weight: 600;
+}

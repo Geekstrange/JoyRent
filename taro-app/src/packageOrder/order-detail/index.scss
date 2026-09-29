@@ -1,0 +1,319 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:14:05
+ * Update Time: 2026-09-22 20:14:05
+ */
+
+
+.order-detail-page {
+  padding: 24px 24px 160px;
+  min-height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.order-no {
+  font-size: 22px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 创建订单时的收货地址卡片 */
+.addr-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.addr-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.addr-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.addr-name {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.addr-phone {
+  font-size: 26px;
+  color: var(--sub);
+  font-variant-numeric: tabular-nums;
+}
+
+.addr-text {
+  display: block;
+  font-size: 26px;
+  color: var(--sub);
+  line-height: 1.5;
+}
+
+.addr-empty {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.addr-sub {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.addr-arrow {
+  font-size: 36px;
+  color: var(--muted);
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.equip-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.equip-thumb {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  background: #e6f4ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #1677ff;
+  font-weight: 600;
+  flex-shrink: 0;
+  /* 有真实封面时图片要贴满圆角容器，不能溢出 */
+  overflow: hidden;
+}
+
+.equip-thumb-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.equip-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.equip-name {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.equip-sub {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.sec {
+  display: block;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sec-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.sec-more {
+  font-size: 24px;
+  color: var(--pri);
+
+  &.muted {
+    color: var(--muted);
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26px;
+  padding: 14px 0;
+
+  &.total {
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+    padding-top: 20px;
+    font-size: 28px;
+    font-weight: 600;
+  }
+}
+
+.label {
+  color: var(--muted);
+}
+
+.val {
+  color: var(--text);
+
+  &.moneyfont {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.total-val {
+  color: var(--red);
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.last-trace {
+  display: block;
+  margin-top: 12px;
+  font-size: 24px;
+  color: var(--sub);
+  line-height: 1.5;
+}
+
+.invoice-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.invoice-hint {
+  font-size: 24px;
+  color: var(--sub);
+}
+
+.invoice-btn {
+  font-size: 26px;
+  color: var(--pri);
+  font-weight: 600;
+}
+
+.muted-text {
+  display: block;
+  font-size: 24px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.footer-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  padding: 16px 24px calc(16px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  z-index: 30;
+}
+
+.sum {
+  flex: 1;
+}
+
+.price {
+  display: block;
+  font-size: 40px;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.hint {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── 押金减免（信用分）─────────────────────────────────────────────── */
+
+/* 原押金 + 实付并排；baseline 对齐让两行数字底部齐平 */
+.val-group {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+/* 原押金：划掉并弱化，突出实付金额 */
+.val-origin {
+  font-size: 22px;
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+/* 减免说明（如「全免押金（信用分 720），已减免 ¥1780」） */
+.credit-note {
+  display: block;
+  font-size: 22px;
+  color: #52c41a;
+  margin-top: 4px;
+}
+
+/* 未授权时的授权入口 */
+.credit-cta {
+  margin-top: 16px;
+  padding: 18px 20px;
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.credit-cta-text {
+  font-size: 24px;
+  color: #389e0d;
+}
+
+.primary-btn {
+  width: 260px;
+  height: 88px;
+  line-height: 88px;
+  background: var(--pri);
+  color: #fff;
+  border-radius: 44px;
+  font-size: 30px;
+  font-weight: 600;
+  border: none;
+  margin: 0;
+
+  &::after {
+    border: none;
+  }
+}

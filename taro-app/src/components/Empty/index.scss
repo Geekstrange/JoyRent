@@ -1,0 +1,46 @@
+/* File Name: index.scss
+ * Created Time: 2026-09-22 20:04:18
+ * Update Time: 2026-09-22 20:04:18
+ */
+
+
+.empty {
+  padding: 140px 0;
+  text-align: center;
+
+  .empty-icon {
+    display: block;
+    font-size: 92px;
+    line-height: 1;
+    color: #d9d9d9;
+    margin-bottom: 24px;
+  }
+
+  .empty-text {
+    display: block;
+    font-size: 28px;
+    color: var(--muted);
+  }
+
+  .empty-hint {
+    display: block;
+    font-size: 24px;
+    color: var(--muted);
+    margin-top: 12px;
+  }
+}
+
+/* 加载态图标：用 CSS 旋转而不是引字体/图片（小程序里最省事） */
+.empty-spin {
+  color: var(--pri);
+  animation: empty-spin 1s linear infinite;
+}
+
+@keyframes empty-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

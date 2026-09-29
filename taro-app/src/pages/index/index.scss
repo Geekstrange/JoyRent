@@ -1,0 +1,194 @@
+/* 首页
+ * 尺寸换算：设计稿 750，1 css px(390 视口) = 2 设计单位。
+ * 下列数值均按此由原始 390 视口尺寸 ×2 得到。
+ */
+
+.home-page {
+  padding: 24px;
+  min-height: 100vh;
+}
+
+/* Hero：linear-gradient(135deg,#1677ff,#69b1ff)
+   圆角 16px → 32px，内边距 18px → 36px */
+.hero {
+  background: linear-gradient(135deg, #1677ff, #69b1ff);
+  border-radius: 32px;
+  padding: 36px;
+  color: #fff;
+  margin-bottom: 24px;
+
+  .hero-title {
+    display: block;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .hero-sub {
+    display: block;
+    font-size: 24px;
+    opacity: 0.9;
+  }
+}
+
+/* 搜索框：圆角 20px → 40px，高度 38px → 76px，内边距 14px → 28px */
+.search-box {
+  background: #fff;
+  border-radius: 40px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+/* demo .search-ico：18px → 36px，透明度 .85 */
+.search-ico {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  display: block;
+  opacity: 0.85;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 26px;
+  color: var(--text);
+}
+
+/* placeholder 颜色与 demo 的 muted 提示文字一致 */
+.search-ph {
+  color: var(--muted);
+}
+
+/* 分类宫格：圆角 16px → 32px，内边距 16px 6px 10px → 32px 12px 20px */
+.cat-grid {
+  background: #fff;
+  border-radius: 32px;
+  padding: 32px 12px 20px;
+  margin-bottom: 24px;
+
+  .cat-grid-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 20px;
+  }
+
+  .cat-grid-title {
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  .cat-grid-more {
+    font-size: 24px;
+    color: var(--muted);
+  }
+
+  .cat-cells {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* 宫格单元：用 flex 百分比宽度而非 grid —— 小程序（尤其支付宝）对
+   display:grid 支持不完整，会出现不换行/错位。 */
+.cat-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  width: 20%;
+  flex: 0 0 20%;
+  box-sizing: border-box;
+
+  /* 图标圆 44px → 88px，首字 23px → 46px */
+  .cat-cell-ico {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: #e6f4ff;
+    color: #1677ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 18px;
+
+    &.all {
+      background: #eaf2fd;
+      /* demo 的 .catcell-svg{padding:9px} → 18px；图标改为图片后不要继承首字的字号/字重 */
+      font-size: 0;
+      font-weight: 400;
+
+      .cat-cell-ico-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+
+  .cat-cell-name {
+    font-size: 22px;
+    color: var(--sub);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* 选中态：2px 主色描边 + 文字变主色加粗 */
+  &.on {
+    .cat-cell-ico {
+      box-shadow: 0 0 0 4px var(--pri);
+    }
+    .cat-cell-name {
+      color: var(--pri);
+      font-weight: 600;
+    }
+  }
+}
+
+/* 二级分类条：横向滚动，chip 圆角 14px → 28px */
+.sub-bar {
+  white-space: nowrap;
+  margin-bottom: 20px;
+  padding: 4px 0 8px;
+}
+
+.sub-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 26px;
+  background: #fff;
+  border-radius: 28px;
+  font-size: 24px;
+  color: var(--sub);
+  margin-right: 12px;
+
+  &.on {
+    background: var(--pri);
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+/* 设备列表：避开 grid，用 flex 两列布局（小程序对 display:grid 支持不完整）
+   间距 10px → 20px */
+.eq-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* 注意：微信 WXSS 不支持 `>` 子选择器与 `*` 通配符（会报 error at token `*`），
+   所以这里给卡片套一个具名类 .eq-grid-cell，不要写 `.eq-grid > *`。 */
+.eq-grid-cell {
+  width: calc(50% - 10px);
+  flex: 0 0 calc(50% - 10px);
+  box-sizing: border-box;
+}

@@ -1,0 +1,54 @@
+# ── 依赖 ──────────────────────────────────────────────────────────────
+node_modules/
+.pnpm-store/
+.yarn/
+
+# ── 构建产物 ──────────────────────────────────────────────────────────
+dist/
+build/
+.swc/
+.taro/
+
+# ── ★ 本地配置：含真实连接串 / 密钥，绝不入库 ────────────────────────
+# 仓库只提供 config.toml.example；部署时 cp 一份再填真实值。
+backend/configs/config.toml
+.env.local
+.env.*.local
+*.local
+
+# ── 运行时上传的业务文件（设备图 / 头像）─────────────────────────────
+# 这些是运行期产生的用户数据，不是源码。
+# backend/data/static/.gitignore 自身也有排除规则，这里再兜一层。
+backend/data/static/equipment/*
+backend/data/static/avatar/*
+!backend/data/static/.gitignore
+!backend/data/static/**/.gitkeep
+
+# ── 小程序开发者工具的本地配置 ────────────────────────────────────────
+# 含个人 IDE 偏好（是否开启热重载、调试设置等），各人不同
+project.private.config.json
+
+# ── 二进制 / 可执行文件 ───────────────────────────────────────────────
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# ── 临时探针（本地验证用的一次性脚本/程序）──────────────────────────
+zz_*.go
+*_probe.exe
+.probe.cjs
+
+# ── 日志 ──────────────────────────────────────────────────────────────
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ── 编辑器 / 系统 ─────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp

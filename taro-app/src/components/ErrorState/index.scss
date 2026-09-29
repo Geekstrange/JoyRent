@@ -1,0 +1,68 @@
+/* 加载失败状态。
+   尺寸遵循 designWidth:750 的换算铁律：demo（390 视口）的值 ×2 = 这里的 rpx。 */
+.err-state {
+  padding: 60px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 28px;
+}
+
+.err-icon {
+  width: 72px;
+  height: 72px;
+  line-height: 68px;
+  text-align: center;
+  border: 3px solid #ffccc7;
+  border-radius: 50%;
+  color: #cf1322;
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.err-text {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2329;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.err-hint {
+  margin-top: 12px;
+  font-size: 24px;
+  color: #8c8c8c;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* 把实际请求地址打出来 —— 排查「连不上」时最关键的一条信息 */
+.err-addr {
+  margin-top: 16px;
+  padding: 8px 20px;
+  background: #f5f6f8;
+  border-radius: 10px;
+  font-size: 22px;
+  color: #595959;
+  word-break: break-all;
+  text-align: center;
+}
+
+.err-btn {
+  margin-top: 28px;
+  padding: 0 40px;
+  height: 72px;
+  line-height: 72px;
+  background: #1677ff;
+  border-radius: 36px;
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.err-btn:active {
+  opacity: 0.85;
+}

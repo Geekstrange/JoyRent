@@ -1,0 +1,93 @@
+[server]
+# 绑所有网卡（不是 127.0.0.1）。微信/支付宝开发者工具的模拟器有自己的网络栈，
+# 只绑 loopback 时模拟器可能连不上（本机 curl 通但工具里请求全失败、后端零日志）。
+# 绑 0.0.0.0 同时也让真机预览（手机走局域网 IP）可用。
+addr = "0.0.0.0:8080"
+mode = "debug"   # debug / release
+# 测试态登录旁路：开启后提供 POST /api/v1/app/auth/dev-login，
+# 跳过微信/支付宝的 code 换取直接签发用户 token。仅供本地联调与冒烟测试，
+# release 模式下即使为 true 也不会注册该路由。
+allow_dev_login = true
+
+[db]
+dsn = "postgres://postgres:postgres@localhost:5432/rental?sslmode=disable"
+max_open  = 25
+max_idle = 5
+conn_max_lifetime = "1h"
+
+[jwt]
+secret = "change-me-in-production"
+expire = "168h"   # 7 天
+
+[storage]
+type = "local"
+dir = "./data/static"
+base_url = "/static"
+max_upload_mb = 10
+
+# ── 微信：小程序登录 + 支付 ────────────────────────────────────────────
+#
+# ⚠️ 这个段同时承载**两件事**，两类字段互不影响，可以只配其中一类：
+#   · 小程序登录（code2session）  ：app_id + app_secret
+#   · 微信支付（JSAPI 下单 / 退款）：app_id + mch_id + api_v3_key
+#                                    + cert_serial_no + private_key_path
+#
+# 配置规则（决定后端注册「真实渠道」还是「Mock 渠道」）：
+#   · 支付专属字段全空（mch_id/api_v3_key/cert_serial_no/private_key_path）
+#     → 支付走 Mock，**服务正常启动**（本地联调 / 只用登录时的常态）
+#   · 上述字段**只填了一部分** → 启动直接**报错**（防止「看起来能支付、
+#     实际收不到钱」的静默降级）
+#   · 全部填齐 → 启用真实微信支付
+#
+# 所以「只配登录、暂不接支付」是完全合法的，不会影响服务启动。
+# ── 物流轨迹查询（第三方）─────────────────────────────────────────────
+#
+# 本平台的运单登记 / 状态流转 / 轨迹展示**不依赖**这段配置；
+# 配了只是多一项「自动从快递公司拉取轨迹」的能力。
+#
+# 三态（与支付、信用分同一套规则）：
+#   三项齐全 → 启用；全部留空 → 停用（管理员手动录入）；只填一部分 → 启动报错。
+#
+# ⚠️ 快递100 是**按次计费**的商业服务，需自行申请账号。
+#    同城自提（self）没有运单，不会被查询。
+[logistics]
+provider = ""        # 目前仅支持 "kuaidi100"；留空停用自动查询
+customer = ""        # 快递100 的 customer（授权码）
+key      = ""        # 快递100 的 key（用于生成请求签名）
+
+[payment.wechat]
+# —— 登录用（支付下单也需要 app_id）——
+app_id = ""
+app_secret = ""       # 小程序 AppSecret，仅用于 jscode2session 登录换 openid
+# —— 支付专用 ——
+mch_id = ""           # 商户号
+api_v3_key = ""       # APIv3 密钥（32 位），用于回调报文的 AES-GCM 解密
+private_key_path = "" # 商户私钥 apiclient_key.pem 的文件路径
+cert_serial_no = ""   # 商户证书序列号（商户平台「API安全」页可查）
+notify_url = ""       # 支付结果回调，必须 HTTPS 且外网可达，如
+                      # https://api.example.com/api/v1/pay/callback/wechat
+
+# ── 支付宝：小程序登录 + 支付 + 芝麻信用 ──────────────────────────────
+#
+# ⚠️ 与微信不同，支付宝的**登录与支付共用同一套凭据**（app_id + 应用私钥），
+# 所以没有「只给登录用」的字段。两项都填齐才启用真实渠道：
+#   · 都填   → 登录与支付一起生效
+#   · 都空   → 两者都走本地 Mock（联调用）
+#   · 只填一项 → 启动**直接报错**（此时登录必然也失败，早报早好）
+#
+# alipay_public_key 不强制：缺它只是**回调验签失败**，下单仍可用（适合先联调下单）。
+[payment.alipay]
+app_id = ""            # 小程序 app_id
+private_key = ""       # 应用私钥（PKCS8，可含 PEM 头尾）
+alipay_public_key = "" # 支付宝公钥，用于回调验签（DecodeNotification 内部会校验）
+notify_url = ""        # 异步通知地址，如
+                       # https://api.example.com/api/v1/pay/callback/alipay
+# 是否走沙箱网关（openapi.alipaydev.com）。沙箱可在没有正式商户资质时联调；
+# ⚠️ 上线必须改为 false。
+sandbox = false
+# 芝麻信用服务 ID（service_id）。
+# ⚠️ 芝麻免押产品为**邀约制、不支持自助接入**，需企业实名认证 + 签约 + 开通
+#    预授权支付后才能拿到 service_id。留空时信用分走**本地模拟**实现
+#    （按用户标识稳定生成 600~800），使「授权 → 算押金 → 下单 → 支付」
+#    全链路可在本地完整跑通；签约后填上此值即切换到真实芝麻。
+credit_service_id = ""

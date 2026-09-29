@@ -1,0 +1,126 @@
+/* 设备卡片：圆角 14px → 28px */
+.eq-card {
+  background: #fff;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 封面：宽度自适应，比例由 aspect-ratio 锁定（4:3），图片 object-fit 裁切。
+   不写死 height，任何尺寸原图都裁成同一比例且不变形。
+   注：小程序对 aspect-ratio 支持不稳，故用 padding-top 撑出 3/4 = 75% 高度。 */
+.eq-cover {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 75%;
+  background: #f0f2f5;
+  overflow: hidden;
+}
+
+.eq-cover-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 无封面时的兜底：分类色底 + 首字 */
+.eq-cover-fallback {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  color: #1677ff;
+  font-weight: 600;
+}
+
+/* 库存角标：top/right 8px → 16px，圆角 9px → 18px */
+.eq-stock {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 4px 14px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 18px;
+  line-height: 1.5;
+}
+
+/* 售罄遮罩 */
+.eq-soldout {
+  position: absolute;
+  /* 不用 inset:0（小程序引擎支持不全），显式四边定位 */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.42);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+/* 内容区：padding 9px 10px 11px → 18px 20px 22px */
+.eq-body {
+  padding: 18px 20px 22px;
+}
+
+/* 名称 13px → 26px，两行截断，min-height 35px → 70px（保证卡片等高） */
+.eq-name {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  min-height: 70px;
+}
+
+/* 规格 11px → 22px */
+.eq-spec {
+  display: block;
+  font-size: 22px;
+  color: var(--muted);
+  margin-top: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 价格行：上边距 6px → 12px，价格 17px → 34px，单位 11px → 22px */
+.eq-foot {
+  display: flex;
+  align-items: baseline;
+  margin-top: 12px;
+}
+
+.eq-price {
+  font-size: 34px;
+  color: var(--red);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.eq-unit {
+  font-size: 22px;
+  color: var(--muted);
+  margin-left: 6px;
+}

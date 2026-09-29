@@ -1,0 +1,302 @@
+openapi: 3.0.3
+info:
+  title: 设备租赁平台 API
+  version: 1.0.0
+  description: |
+    管理后台 + 小程序端统一 API。
+    所有响应统一为 { code, message, data } 结构，code=0 表示成功。
+    金额字段统一以「分」为单位，字段名带 _cents 后缀。
+servers:
+  - url: /api/v1
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Response:
+      type: object
+      properties:
+        code: { type: integer, example: 0 }
+        message: { type: string, example: ok }
+        data: { }
+
+    Category:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        merchant_id: { type: integer, format: int64 }
+        parent_id: { type: integer, format: int64 }
+        name: { type: string }
+        sort: { type: integer }
+        created_at: { type: string, format: date-time }
+        updated_at: { type: string, format: date-time }
+
+    Equipment:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        category_id: { type: integer, format: int64 }
+        name: { type: string }
+        spec: { type: string }
+        description: { type: string }
+        cover_path: { type: string }
+        daily_cents: { type: integer, format: int64 }
+        deposit_cents: { type: integer, format: int64 }
+        total: { type: integer }
+
+    Order:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        no: { type: string }
+        user_id: { type: integer, format: int64 }
+        equipment_id: { type: integer, format: int64 }
+        unit_id: { type: integer, format: int64 }
+        start_at: { type: string, format: date }
+        end_at: { type: string, format: date }
+        days: { type: integer }
+        rent_cents: { type: integer, format: int64 }
+        deposit_cents: { type: integer, format: int64 }
+        status:
+          type: string
+          enum: [pending, paid, renting, returned, closed, cancelled]
+        dep_status:
+          type: string
+          enum: [unpaid, paid, refunded]
+
+    Invoice:
+      type: object
+      properties:
+        id: { type: integer, format: int64 }
+        no: { type: string }
+        order_id: { type: integer, format: int64 }
+        amount_cents: { type: integer, format: int64 }
+        type: { type: string, enum: [personal, company] }
+        title: { type: string }
+        tax_no: { type: string }
+        email: { type: string }
+        status: { type: string, enum: [pending, issued, rejected] }
+        invoice_no: { type: string }
+        reason: { type: string }
+
+    Shipment:
+      type: object
+      properties:
+        order_id: { type: integer, format: int64 }
+        express: { type: string }
+        no: { type: string }
+        status:
+          type: string
+          enum: [none, shipped, delivering, signed, returning, received]
+        receiver: { type: string }
+        phone: { type: string }
+        address: { type: string }
+
+paths:
+  /admin/login:
+    post:
+      summary: 管理后台登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string }
+                password: { type: string }
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          token: { type: string }
+                          admin: { type: object }
+
+  /app/auth/wechat:
+    post:
+      summary: 微信小程序登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string }
+      responses:
+        '200': { description: ok }
+
+  /app/auth/alipay:
+    post:
+      summary: 支付宝小程序登录
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [code]
+              properties:
+                code: { type: string }
+      responses:
+        '200': { description: ok }
+
+  /admin/categories:
+    get:
+      summary: 分类列表
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items: { $ref: '#/components/schemas/Category' }
+    post:
+      summary: 创建分类
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string }
+                parent_id: { type: integer, format: int64 }
+                sort: { type: integer }
+      responses:
+        '200': { description: ok }
+
+  /admin/equipments:
+    get:
+      summary: 设备列表
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { in: query, name: category_id, schema: { type: integer, format: int64 } }
+        - { in: query, name: keyword,     schema: { type: string } }
+      responses:
+        '200': { description: ok }
+    post:
+      summary: 创建设备
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200': { description: ok }
+
+  /admin/orders:
+    get:
+      summary: 订单列表（管理端）
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { in: query, name: status,  schema: { type: string } }
+        - { in: query, name: keyword, schema: { type: string } }
+      responses:
+        '200': { description: ok }
+
+  /admin/orders/{id}/transition:
+    post:
+      summary: 订单状态流转
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { in: path, name: id, required: true, schema: { type: integer, format: int64 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [next]
+              properties:
+                next: { type: string }
+      responses:
+        '200': { description: ok }
+        '409': { description: 非法状态流转 }
+
+  /app/orders:
+    get:
+      summary: 我的订单
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200': { description: ok }
+    post:
+      summary: 创建订单
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [equipment_id, start_at, end_at]
+              properties:
+                equipment_id: { type: integer, format: int64 }
+                start_at: { type: string, format: date }
+                end_at: { type: string, format: date }
+      responses:
+        '200': { description: ok }
+        '409': { description: 该租期已租完 }
+
+  /app/orders/{id}/pay:
+    post:
+      summary: 创建支付
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { in: path, name: id, required: true, schema: { type: integer, format: int64 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [channel]
+              properties:
+                channel: { type: string, enum: [wechat, alipay] }
+      responses:
+        '200': { description: ok }
+
+  /pay/callback/{channel}:
+    post:
+      summary: 支付回调（不走 JWT）
+      parameters:
+        - { in: path, name: channel, required: true, schema: { type: string } }
+      responses:
+        '200': { description: ok }
+
+  /admin/upload:
+    post:
+      summary: 上传文件
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file: { type: string, format: binary }
+                scope: { type: string, enum: [equipment, avatar] }
+      responses:
+        '200': { description: ok }
